@@ -14,7 +14,7 @@ class Scraper
         scraped_students << {
           :name => student.css("h4.student-name").text,
           :location => student.css("p.student-location").text,
-          :profile_url => "./fixtures/student-site/" + student.css("a.href").value
+          :profile_url => student.css("a").attribute("href").value
         }
       end
         scraped_students
