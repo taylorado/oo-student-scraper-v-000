@@ -19,15 +19,15 @@ class Scraper
       scraped_students
   end
 
-  
+
     def self.scrape_profile_page(profile_url)
       get_page = Nokogiri::HTML(open(profile_url))
-  
+
       student_profile = {
         :profile_quote => get_page.css(".profile-quote").text,
         :bio => get_page.css("p").text
       }
-  
+
       get_page.css("div.social-icon-container a").each do |social|
         case social.at("img").attributes["src"].value
         when "../assets/img/twitter-icon.png"
