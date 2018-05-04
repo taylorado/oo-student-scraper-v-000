@@ -5,26 +5,24 @@ class Scraper
 
   def self.scrape_index_page(index_url)
     scraped_students = []
-    students_index = Nokogiri::HTML(open(index_url))
+    students_index = Nokogiri::HTML(open(index_url))  
 
-
-
-      students_index.css("div.student-card").each do |student|
-        scraped_students << {
-          :name => student.css("h4.student-name").text,
-          :location => student.css("p.student-location").text,
-          :profile_url => student.css("a").attribute("href").value
+    #iterate over each student-card, adding a hash (of the student's name, location and profile) to the scraped_students array each time
+    students_index.css("div.student-card").each do |student|
+      scraped_students << {
+        :name => student.css("h4.student-name").text,
+        :location => student.css("p.student-location").text,
+        :profile_url => student.css("a").attribute("href").value
         }
-      end
-        scraped_students
     end
+        scraped_students
+  end
 
- def self.scrape_profile_page(profile_url)
+  def self.scrape_profile_page(profile_url)
     student_profile = {}
     profile_page = Nokogiri::HTML(open(profile_url))
 
-    # iterate over each social icon container and add
-
+    # iterate over each social icon container and add each link to student profile hash (only if present)
     profile_page.css("div.main-wrapper.profile .social-icon-container a").each do |social_link|
       if social_link.attribute("href").value.include?("twitter")
         student_profile[:twitter] = social_link.attribute("href").value
@@ -42,4 +40,6 @@ class Scraper
 
     student_profile
   end
+
+  
 end
