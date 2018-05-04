@@ -17,7 +17,8 @@ class Student
   end
 
   def add_student_attributes(attributes_hash)
-     attributes_hash.each { |k, v| self.send(("#{k}="), v) }
+    attributes_hash.each { |k, v| instance_variable_set("@#{k}", v) unless v.nil? }
+    #attributes_hash.each { |k, v| self.send(("#{k}="), v) }
   end
 
   def self.all
