@@ -6,15 +6,15 @@ class Scraper
   def self.scrape_index_page(index_url)
 
 
-    index = Nokogiri::HTML(open(index_url))
+    students_index = Nokogiri::HTML(open(index_url))
 
 
       scraped_students = []
-      index.css("div.student-card").each do |student|
+      students_index.css("div.student-card").each do |student|
         scraped_students << {
           :name => student.css("h4.student-name").text,
           :location => student.css("p.student-location").text,
-          :profile_url => index_url + student.at("a").attributes["href"].value
+          :profile_url => CommandLineInterface.BASE_PATH + student.at("a").attributes["href"].value
         }
       end
         scraped_students
