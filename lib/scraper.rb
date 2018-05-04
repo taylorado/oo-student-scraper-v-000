@@ -26,15 +26,15 @@ class Scraper
 
     # iterate over each social icon container and add
 
-    profile_page.css("div.main-wrapper.profile .social-icon-container a").each do |social|
-      if social.attribute("href").value.include?("twitter")
-        student_profile[:twitter] = social.attribute("href").value
-      elsif social.attribute("href").value.include?("linkedin")
-        student_profile[:linkedin] = social.attribute("href").value
-      elsif social.attribute("href").value.include?("github")
-        student_profile[:github] = social.attribute("href").value
+    profile_page.css("div.main-wrapper.profile .social-icon-container a").each do |social_link|
+      if social_link.attribute("href").value.include?("twitter")
+        student_profile[:twitter] = social_link.attribute("href").value
+      elsif social_link.attribute("href").value.include?("linkedin")
+        student_profile[:linkedin] = social_link.attribute("href").value
+      elsif social_link.attribute("href").value.include?("github")
+        student_profile[:github] = social_link.attribute("href").value
       else
-        student_profile[:blog] = social.attribute("href").value
+        student_profile[:blog] = social_link.at("href").value
       end
     end
 
