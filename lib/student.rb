@@ -5,8 +5,8 @@ class Student
   @@all = []
 
   def initialize(student_hash)
-    student_hash.each { |k, v| instance_variable_set("@#{k}", v) unless v == nil }  # alternative method which checks for empty
-    #student_hash.each { |k, v| self.send(("#{k}="), v) }
+    #student_hash.each { |k, v| instance_variable_set("@#{k}", v) unless v == nil }  # alternative method which checks for empty
+    student_hash.each { |k, v| self.send(("#{k}="), v) }
     @@all << self
   end
 
